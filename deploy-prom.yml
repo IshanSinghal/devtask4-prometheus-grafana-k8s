@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-prom
+  labels:
+    name: mygrafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: myprom
+  template:
+    metadata:
+      name: prom-pods
+      labels:
+        name: myprom
+    spec:
+      containers:
+      - image: ishandsce/prometheus:latest
+        name: con-prom
+        volumeMounts:
+          - name: configmap-prometheus
+            mountPath: /etc/prometheus/prometheus.yml
+            subPath: prometheus.yml  
+          - name: vol1prom
+            mountPath: /etc/prometheus/data
+      volumes:
+      - name: configmap-prometheus
+        configMap:
+          name: configmap-prom
+      - name: vol1prom
+        persistentVolumeClaim:
+          claimName: pvc1-prom

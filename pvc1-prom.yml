@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc1-prom
+  labels:
+    name: pvc1prom
+spec:
+  accessModes:
+   - ReadWriteOnce 
+  resources:
+    requests:
+      storage: 2Gi

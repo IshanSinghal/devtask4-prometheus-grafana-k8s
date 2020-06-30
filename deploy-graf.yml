@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-grafana
+  labels:
+    name: mygrafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mygrafana
+  template:
+    metadata:
+      name: grad-pods
+      labels:
+        name: mygrafana
+    spec:
+      containers:
+      - image: ishandsce/grafana:latest
+        name: con-grafana
+        volumeMounts:
+        - name: vol1-grafana
+          mountPath: /var/lib/grafana
+        - name: vol2-grafana
+          mountPath: /var/log/grafana
+        - name: vol3-grafana
+          mountPath: /etc/grafna 
+            
+      volumes:
+      - name: vol1-grafana
+        persistentVolumeClaim:
+          claimName: pvc1-grafana
+      - name: vol2-grafana
+        persistentVolumeClaim:
+          claimName: pvc2-grafana
+      - name: vol3-grafana
+        persistentVolumeClaim:
+          claimName: pvc3-grafana

@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - configmap-prometheus.yml
+  - pvc1-prom.yml
+  - pvc1-grafana.yml
+  - pvc2-grafana.yml
+  - pvc3-grafana.yml
+  - deploy-prom.yml
+  - deploy-graf.yml
+  - svc-prom.yml
+  - svc-grafana.yml
